@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import RestaurantItem from "@/components/RestaurantItem";
+import RestaurantItem from "@/components/RestaurantsMenu/RestaurantItem";
 export default {
 name: "RestaurantsMenu",
   components: {RestaurantItem},

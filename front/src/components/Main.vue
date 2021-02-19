@@ -29,8 +29,8 @@
 // import Navbar from './components/Navbar.vue';
 import Navbar from "@/components/Navbar";
 import SearchEverything from "@/components/SearchEverything";
-import Gallery from "@/components/Gallery";
-import RestaurantsMenu from "@/components/RestaurantsMenu";
+import Gallery from "@/components/FoodGallery/Gallery";
+import RestaurantsMenu from "@/components/RestaurantsMenu/RestaurantsMenu";
 import RestaurantsRating from "@/components/RestaurantsRating";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
