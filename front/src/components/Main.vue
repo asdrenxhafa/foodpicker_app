@@ -37,7 +37,7 @@ import Footer from "@/components/Footer";
 import Copyright from "@/components/Copyright";
 
 export default {
-  name: 'HelloWorld',
+  name: 'Main',
   components: {Copyright, Footer, Contact, RestaurantsRating, RestaurantsMenu, Gallery, SearchEverything, Navbar},
   props: {
     msg: String

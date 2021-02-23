@@ -15,7 +15,9 @@
           <li><a href="#home" class="smoothScroll">HOME</a></li>
           <li><a href="#restaurant" class="smoothScroll">RESTAURANTS</a></li>
           <li><a href="#contact" class="smoothScroll">CONTACT</a></li>
-          <li><a href="#login/register" class="smoothScroll">LOG IN/ REGISTER</a></li>
+          <li>
+            <router-link to="/login">LOG IN/ REGISTER</router-link>
+          </li>
         </ul>
       </div>
     </div>
