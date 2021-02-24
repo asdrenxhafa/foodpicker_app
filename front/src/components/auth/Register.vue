@@ -96,7 +96,7 @@ export default {
                   displayName: this.form.name
                 })
                 .then(() => {
-                  this.$router.replace({ name: "Main" });
+                  window.location = '/';
                 });
           })
           .catch(err => {
