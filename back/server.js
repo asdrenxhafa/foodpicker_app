@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 const cors= require('cors');
 const mongoose = require('mongoose');
 const config = require('./db');
-// const con = require('..');
+const restaurants = require('./routes/restaurants');
+
 
 mongoose.Promise=global.Promise;
 mongoose.connect(config.db);
@@ -12,7 +13,7 @@ mongoose.connect(config.db);
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-// app.use(/)
+app.use('/restaurants', restaurants)
 var port = process.env.PORT || 4000;
 
 app.listen(port,function(){
