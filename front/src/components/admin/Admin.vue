@@ -1,64 +1,54 @@
 <template>
-   <v-app>
-  <v-app-bar app color="indigo" dark >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+  <v-app>
+    <v-app-bar app color="indigo" dark>
+      <v-btn text v-on:click="changeBodyState()">
+        Restaurants
+      </v-btn>
+
+      <v-btn text v-on:click="changeBodyState()">
+        Foods
+      </v-btn>
     </v-app-bar>
-        <v-navigation-drawer 
-        v-model="drawer"
-      app
-        >
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="title">
-            Admin
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            Panel
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
 
-      <v-divider></v-divider>
+    <v-main>
 
-      <v-list
-        dense
-        nav >
-        <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          link
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
+      <template v-if="this.restaurantOrFoods === 0">
+        <Restaurants></Restaurants>
+      </template>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-   </v-app>
+      <template v-if="this.restaurantOrFoods === 1">
+        <Foods></Foods>
+      </template>
+
+
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
+
 <script>
+import Restaurants from "@/components/admin/Restaurants/Restaurants";
+import Foods from "@/components/admin/Foods/Foods";
 export default {
-    data: () => ({
-    drawer:null,
-        items: [
-          { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-          { title: 'Restaurants', icon: 'mdi-image' },
-          { title: 'Foods', icon: 'mdi-help-box' },
-        ],
-        right: null,
-     
-      
-    }),
-
-
+  components: {Foods, Restaurants},
+    data(){
+      return{
+        restaurantOrFoods : 0,
+      }
+    },
+  methods : {
+    changeBodyState(){
+      if(this.restaurantOrFoods == 0 ){
+        this.restaurantOrFoods = 1;
+      }else if(this.restaurantOrFoods == 1){
+        this.restaurantOrFoods = 0;
+      }
+    }
+  },
 }
 </script>
+
 
 <style>
 

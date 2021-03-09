@@ -18,21 +18,22 @@
 
 <script>
 import RestaurantItem from "@/components/RestaurantsMenu/RestaurantItem";
+import axios from "axios";
+
 export default {
 name: "RestaurantsMenu",
   components: {RestaurantItem},
   data(){
     return{
-      restaurants :
-          [
-            {logo : 'images/papillon.jpg' , name : 'Papillon'},
-            {logo : 'images/papillon.jpg' , name : 'Papillon'},
-            {logo : 'images/papillon.jpg' , name : 'Papillon'},
-            {logo : 'images/papillon.jpg' , name : 'Papillon'},
-            {logo : 'images/papillon.jpg' , name : 'Papillon'},
-            {logo : 'images/papillon.jpg' , name : 'Papillon'},
-          ]
+      restaurants : [],
+      url: process.env.API_URL,
     }
+  },
+  created() {
+    axios.get('http://localhost:4000/restaurants').then( res =>
+        this.restaurants= res.data,
+    ).catch();
+    console.log(this.url);
   },
 }
 </script>

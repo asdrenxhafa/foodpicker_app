@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-6 col-sm-6">
-    <h4>{{ this.restaurant.name }}</h4><span><img :src="this.restaurant.logo"></span>
+    <h4>{{ this.restaurant.name }}</h4><span><img :src="this.restaurant.images[0].url"></span>
   </div>
 </template>
 
