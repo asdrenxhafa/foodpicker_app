@@ -5,6 +5,8 @@ import Main from '../components/Main'
 import Login from '../components/auth/Login'
 import Register from '../components/auth/Register'
 import Admin from '../components/admin/Admin';
+import EditRestaurant from '../components/admin/Restaurants/EditRestaurant';
+import CreateRestaurant from '../components/admin/Restaurants/CreateRestaurant';
 
 Vue.use(VueRouter)
 
@@ -29,6 +31,17 @@ const routes = [
     name: 'Admin',
     component: Admin
   },
+  {
+    path: '/admin/editrestaurant',
+    name: 'EditRestaurant',
+    component: EditRestaurant
+  },
+  {
+    path: '/admin/createrestaurant',
+    name: 'CreateRestaurant',
+    component: CreateRestaurant
+  },
+
 ]
 
 const router = new VueRouter({

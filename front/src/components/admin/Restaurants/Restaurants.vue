@@ -19,8 +19,8 @@
         <td>{{res.name}}</td>
         <td>{{res.location[0].city}},{{res.location[0].street}}</td>
         <v-card-actions>
-        <v-btn color="blue darken-1" dark v-on:click="editres(res._id)">Details</v-btn>
-        <v-btn color="blue darken-1" dark v-on:click="deleteres(res._id)">Delete</v-btn>
+        <v-btn color="blue darken-1" dark v-on:click="editres(res)">Edit</v-btn>
+        <v-btn color="blue darken-1" dark v-on:click="deleteres(res)">Delete</v-btn>
         </v-card-actions>
       </tr>
       </tbody>
@@ -51,17 +51,19 @@ name: "Restaurants",
   },
   methods:{
     editres(restaurant){
-      console.log(restaurant.id);
+      // console.log(restaurant._id);
       this.$router.push({
         name:'EditRestaurant',
-        params:{id:restaurant.id}
+        params:{id:restaurant._id}
       })
     },
     deleteres(restaurant){
-      axios.delete('http://localhost:4000/restaurants/'+restaurant)
+      const index = this.restaurants.indexOf(restaurant)
+      confirm('Are you sure you want to delete this restaurant?') && this.restaurants.splice(index, 1)
+      axios.delete('http://localhost:4000/restaurants/'+restaurant._id)
       .then((res)=>{
-        console.log(res);
         this.$router.go();
+        return res
       }).catch();
     }
   }
