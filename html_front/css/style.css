@@ -444,3 +444,11 @@ footer .fa {
 form.amp-form-submit-error [submit-error] {
   color: red;
 }
+.images span img {
+  max-width: 300px;
+  max-height: 300px;
+  min-width: 300px;
+  min-height: 300px;
+  object-fit: cover;
+  object-position: center;
+}
