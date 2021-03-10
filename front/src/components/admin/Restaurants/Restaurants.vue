@@ -6,19 +6,21 @@
 
       <tr>
         <th class="text-left">
-          Name
+          Emri
         </th>
         <th class="text-left">
-          Calories
+          Location
         </th>
       </tr>
       </thead>
       <tbody>
-      <tr>
+      <tr v-for="res in restaurants"
+        :key="res.id">
 <!--          v-for="item in desserts"-->
 <!--          :key="item.name"-->
-        <td></td>
-        <td></td>
+            
+        <td>{{res.name}}</td>
+        <td>{{res.location[0].city}},{{res.location[0].street}}</td>
       </tr>
       </tbody>
     </template>
