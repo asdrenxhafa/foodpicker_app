@@ -75,6 +75,9 @@ router.put('/:id',upload.single('image'),function(req,res,next){
 })
 
 router.delete('/:id',function(req,res,next){
+    // Deleting image of the item being deleted
+    deleteImageRestaurant(req.params.id);
+
     Restaurant.findByIdAndRemove(req.params.id,req.body,function(err,post){
         if(err)return next(err);
         res.json(post);
