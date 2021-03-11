@@ -13,7 +13,7 @@
       required
     ></v-text-field>
 
-    <v-file-input v-model="restaurant.images[0]" show-size counter multiple label="Foto" required></v-file-input>
+    <v-file-input v-model="restaurnt_image" id="restaurant-image-form" show-size counter multiple label="Foto" required></v-file-input>
 
     <v-text-field v-model.trim="restaurant.location[0].city" label="Qyteti" required></v-text-field>
 
@@ -41,6 +41,7 @@ export default {
   data() {
     return {
       restaurant: {},
+      restaurnt_image : null,
       valid: true,
       name: "",
       nameRules: [
@@ -61,7 +62,7 @@ export default {
   created() {
     axios.get(`http://localhost:4000/restaurants/` + this.$route.params.id)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         this.restaurant = res.data;
       })
       .catch();
@@ -75,9 +76,27 @@ export default {
       this.$refs.form.reset();
     },
     onSubmit (evt) {
+
+      var formData = new FormData();
+      formData.append("image", this.restaurnt_image[0]);
+      formData.append("restaurant_name", this.restaurant.name);
+      formData.append("restaurant_description", this.restaurant.description);
+      formData.append("restaurant_images_public_id", this.restaurant.images[0].public_id);
+      formData.append("restaurant_images_url", this.restaurant.images[0].url);
+      formData.append("restaurant_location_city", this.restaurant.location[0].city);
+      formData.append("restaurant_location_street", this.restaurant.location[0].street);
+      formData.append("restaurant_telephone", this.restaurant.telephone);
+
       evt.preventDefault()
-      axios.put(`http://localhost:4000/restaurants/` + this.$route.params.id, this.restaurant)
+      axios.put(`http://localhost:4000/restaurants/` + this.$route.params.id, formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
       .then(response => {
+        // console.log(response)
+
         this.$router.push({
           name: 'Admin',
         })
