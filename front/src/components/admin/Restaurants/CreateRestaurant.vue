@@ -14,7 +14,7 @@
     ></v-text-field>
 
     <v-file-input
-      v-model="restaurant.images[0]"
+      v-model="this.restaurnt_image"
       show-size
       counter
       multiple
@@ -56,12 +56,28 @@ export default {
   data() {
     return {
       restaurnt: {},
+      restaurnt_image : null,
     };
   },
   methods: {
     onSubmit(evt) {
+
+      var formData = new FormData();
+      formData.append("image", this.restaurnt_image[0]);
+      formData.append("restaurant_name", this.restaurant.name);
+      formData.append("restaurant_description", this.restaurant.description);
+      formData.append("restaurant_images_public_id", this.restaurant.images[0].public_id);
+      formData.append("restaurant_images_url", this.restaurant.images[0].url);
+      formData.append("restaurant_location_city", this.restaurant.location[0].city);
+      formData.append("restaurant_location_street", this.restaurant.location[0].street);
+      formData.append("restaurant_telephone", this.restaurant.telephone);
+
       evt.preventDefault();
-      axios.post(`http://localhost:4000/restaurants`, this.restaurants)
+      axios.post(`http://localhost:4000/restaurants`, formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            })
         .then((res) => {
           this.$router.push({
             name: "Admin",

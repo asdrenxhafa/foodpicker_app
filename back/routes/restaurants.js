@@ -39,8 +39,27 @@ router.get('/:id',function(req,res,next){
     })
 })
 
-router.post('/',function(req,res,next){
-    Restaurant.create(req.body,function(err,post){
+router.post('/',upload.single('image'),function(req,res,next){
+
+    let restaurant = {
+        name: req.body.restaurant_name,
+        description: req.body.restaurant_description,
+        images: [
+            {
+                public_id: req.body.restaurant_images_public_id,
+                url: __imagesPath + '\\' + req.file.filename
+            }
+        ],
+        location:[
+            {
+                city: req.body.restaurant_location_city ,
+                street: req.body.restaurant_location_street
+            }
+        ],
+        telephone: req.body.restaurant_telephone
+    }
+
+    Restaurant.create(restaurant,function(err,post){
         if(err)return next(err);
         res.json(post);
     })
