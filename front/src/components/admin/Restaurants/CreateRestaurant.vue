@@ -1,29 +1,30 @@
 <template>
   <v-form ref="form" v-model="valid" lazy-validation @submit="onSubmit">
     <v-text-field
-      v-model.trim="restaurant.name"
+      v-model="restaurant.name"
       :counter="10"
       :rules="nameRules"
       label="Name"
       required
     ></v-text-field>
     <v-text-field
-      v-model.trim="restaurant.description"
+      v-model="restaurant.description"
       label="Description"
       required
     ></v-text-field>
 
-    <v-file-input
-      v-model="restaurant.images[0]"
+    <!-- <v-file-input
+    v-model="restaurnt_image"
       show-size
       counter
       multiple
       label="Foto"
-      required
-    ></v-file-input>
+      
+    ></v-file-input> -->
+  
 
     <v-text-field
-      v-model.trim="restaurant.location[0].city"
+      v-model="restaurant.location[0].city"
       label="Qyteti"
       required
     ></v-text-field>
@@ -35,7 +36,7 @@
     ></v-text-field>
 
     <v-text-field
-      v-model.trim="restaurant.telephone"
+      v-model="restaurant.telephone"
       :counter="9"
       :rules="telRules"
       label="Phone Number"
@@ -55,20 +56,56 @@ export default {
   name: "CreateRestaurant",
   data() {
     return {
-      restaurnt: {},
+      restaurnt_image :[
+        {
+            public_id: "restaurants/dwameeok2nr3okr33",
+            url: "https://blog.logomyway.com/wp-content/uploads/2017/01/mcdonalds-logo-1.jpg"
+        }],
+      restaurant: {
+        name:'',
+        description:'',
+        images:[
+          {
+            public_id: "restaurants/dwameeok2nr3okr33",
+            url: "https://blog.logomyway.com/wp-content/uploads/2017/01/mcdonalds-logo-1.jpg"
+          }
+        ],
+        location:[{
+          city:'',
+          street:''
+        }],
+        telephone:''
+      },
+      valid: true,
+      name: "",
+      nameRules: [
+        (v) => !!v || "Name is required",
+        (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
+      ],
+      email: "",
+      emailRules: [(v) => !!v || "Description is required"],
+      telRules: [
+        (v) => !!v || "Telephone is required",
+        (v) =>
+          (v && v.length <= 9 && v.length >= 9) ||
+          "Telephone must be 9 numbers",
+      ],
     };
   },
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      axios.post(`http://localhost:4000/restaurants`, this.restaurants)
+      axios.post(`http://localhost:4000/restaurants`, this.restaurant)
         .then((res) => {
           this.$router.push({
             name: "Admin",
           });
-        return res
+       console.log(res);
         })
         .catch();
+    },
+    reset() {
+      this.$refs.form.reset();
     },
   },
 };

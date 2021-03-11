@@ -3,7 +3,9 @@
     <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
     <template v-slot:default>
       <thead>
-      <h1>Restaurants</h1>
+      <h1>Restaurants
+      <v-btn color="indigo" dark v-on:click="createres()">Create New Restaurant</v-btn>
+      </h1>
       <tr>
         <th class="text-left">
           Emri
@@ -65,6 +67,11 @@ name: "Restaurants",
         this.$router.go();
         return res
       }).catch();
+    },
+    createres(){
+      this.$router.push({
+        name:'CreateRestaurant'
+      })
     }
   }
 }
