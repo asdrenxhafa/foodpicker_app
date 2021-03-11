@@ -1,8 +1,9 @@
 var Restaurant = require('../models/Restaurants');
 var express=require('express');
 var mongoose=require('mongoose');
-var router=express.Router();
 const multer = require('multer');
+const fs = require('fs');
+var router=express.Router();
 
 
 var storage = multer.diskStorage({
@@ -19,7 +20,6 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-// const upload = multer({dest : 'images'});
 
 var path = require('path'),
     __imagesPath = path.dirname(module.parent.filename) + "\\images";
@@ -46,35 +46,32 @@ router.post('/',function(req,res,next){
     })
 })
 router.put('/:id',upload.single('image'),function(req,res,next){
-    let oldRestaurnat = Restaurant.findById(req.params.id,function(err,post){
+
+    // Deleting old image
+    deleteImageRestaurant(req.params.id);
+
+    let restaurant = {
+        name: req.body.restaurant_name,
+        description: req.body.restaurant_description,
+        images: [
+            {
+                public_id: req.body.restaurant_images_public_id,
+                url: __imagesPath + '\\' + req.file.filename
+            }
+        ],
+        location:[
+            {
+                city: req.body.restaurant_location_city ,
+                street: req.body.restaurant_location_street
+            }
+        ],
+        telephone: req.body.restaurant_telephone
+    }
+
+    Restaurant.findByIdAndUpdate(req.params.id,restaurant,function(err,post){
         if(err)return next(err);
-        return res;
+        res.json(post);
     })
-
-    res.send(oldRestaurnat.restaurant_image_url);
-
-    // let restaurant = {
-    //     name: req.body.restaurant_name,
-    //     description: req.body.restaurant_description,
-    //     images: [
-    //         {
-    //             public_id: req.body.restaurant_images_public_id,
-    //             url: __imagesPath + '\\' + req.file.filename
-    //         }
-    //     ],
-    //     location:[
-    //         {
-    //             city: req.body.restaurant_location_city ,
-    //             street: req.body.restaurant_location_street
-    //         }
-    //     ],
-    //     telephone: req.body.restaurant_telephone
-    // }
-    //
-    // Restaurant.findByIdAndUpdate(req.params.id,restaurant,function(err,post){
-    //     if(err)return next(err);
-    //     res.json(post);
-    // })
 })
 
 router.delete('/:id',function(req,res,next){
@@ -83,6 +80,14 @@ router.delete('/:id',function(req,res,next){
         res.json(post);
     })
 })
+
+
+var deleteImageRestaurant = function(id) {
+    Restaurant.findById(id,function(err,post){
+        if(err)return next(err);
+        fs.unlinkSync(post.images[0].url);
+    })
+}
 
 module.exports = router;
 
