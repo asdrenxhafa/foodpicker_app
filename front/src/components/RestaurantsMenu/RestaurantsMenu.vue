@@ -26,14 +26,12 @@ name: "RestaurantsMenu",
   data(){
     return{
       restaurants : [],
-      url: process.env.API_URL,
     }
   },
   created() {
     axios.get('http://localhost:4000/restaurants').then( res =>
         this.restaurants= res.data,
     ).catch();
-    console.log(this.url);
   },
 }
 </script>
