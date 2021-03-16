@@ -8,7 +8,7 @@ var router=express.Router();
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'images')
+        cb(null, '../front/public/logos')
     },
     filename: function (req, file, cb) {
         let ext = ''; // set default extension (if any)
@@ -22,7 +22,7 @@ var upload = multer({ storage: storage });
 
 
 var path = require('path'),
-    __imagesPath = path.dirname(module.parent.filename) + "\\images";
+    __imagesPath = "logos";
 
 
 router.get('/',function(req,res,next){
@@ -107,7 +107,7 @@ router.delete('/:id',function(req,res,next){
 var deleteImageRestaurant = function(id) {
     Restaurant.findById(id,function(err,post){
         if(err)return next(err);
-        fs.unlinkSync(post.images[0].url);
+        fs.unlinkSync("C:\\Users\\Asdren\\Desktop\\foodpicker_app\\front\\public\\" + "\\" + post.images[0].url);
     })
 }
 
