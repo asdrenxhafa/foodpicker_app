@@ -18,14 +18,14 @@
             v-if="this.restaurantOrFoods === 'restaurants'"
             >Create New Restaurant</v-btn
           >
-          <!-- <v-btn
+          <v-btn
             right
             color="indigo"
             dark
             v-on:click="createres('CreateFoods')"
             v-if="this.restaurantOrFoods === 'food'"
             >Create New Foods</v-btn
-          > -->
+          >
         </div>
       </div>
     </v-app-bar>

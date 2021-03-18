@@ -1,12 +1,12 @@
 <template  v-slot:default>
   <div>
-    <h1 class="title">Table</h1>
+    <h1 class="title">Restaurants</h1>
     <v-simple-table class="restaurant-parent">
       <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
       <template>
         <thead>
           <tr>
-            <th class="text-left">Emri</th>
+            <th class="text-left">Name</th>
             <th class="text-left">Location</th>
             <th class="text-left">Description</th>
             <th class="text-left">Phone Number</th>
@@ -24,7 +24,7 @@
               <v-btn color="blue darken-1" dark v-on:click="editres(res)"
                 >Edit</v-btn
               >
-              <v-btn color="blue darken-1" dark v-on:click="deleteres(res)"
+              <v-btn color="red darken-1" dark v-on:click="deleteres(res)"
                 >Delete</v-btn
               >
             </v-card-actions>
