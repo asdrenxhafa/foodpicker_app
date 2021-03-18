@@ -201,12 +201,12 @@ hr {
 }
 #gallery img {
   width: 100%;
-  padding-bottom: 18px;
+  padding-bottom: 30px;
 }
 #gallery .col-md-4 div {
   position: relative;
   bottom: 18px;
-  padding-bottom: 12px;
+  /* padding-bottom: 12px; */
 }
 #gallery h3 {
   font-size: 18px;
