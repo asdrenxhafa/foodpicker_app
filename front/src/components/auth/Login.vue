@@ -55,7 +55,16 @@
             <a class="txt1" href="#">
               Forgot Password?
             </a>
+            <br><br>
+            <a class="txt1" href="register">
+              Don't have an account!
+            </a>
           </div>
+           <!-- <div class="text-center p-t-90">
+            <a class="txt1" href="register">
+              Don't have an account!
+            </a>
+          </div> -->
         </form>
       </div>
     </div>

@@ -1,75 +1,77 @@
 <template>
+  <div class="limiter">
+    <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+      <div class="wrap-login100">
+        <div v-if="error" class="alert alert-danger">{{error}}</div>
+        <form class="login100-form validate-form" @submit.prevent="submit">
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
 
-  <!--    <div class="container">-->
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-header">Register</div>
-        <div class="card-body">
-          <div v-if="error" class="alert alert-danger">{{error}}</div>
-          <form action="#" @submit.prevent="submit">
-            <div class="form-group row">
-              <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+          <span class="login100-form-title p-b-34 p-t-27">
+						Register
+					</span>
 
-              <div class="col-md-6">
-                <input
-                    id="name"
-                    type="name"
-                    class="form-control"
-                    name="name"
-                    value
-                    required
-                    autofocus
-                    v-model="form.name"
-                />
-              </div>
-            </div>
+           <div class="wrap-input100 validate-input" data-validate = "Enter username">
+            <input
+                id="username"
+                type="text"
+                class="input100"
+                name="username"
+                value
+                required
+                autofocus
+                v-model="form.username"
+            />
+            <span class="focus-input100" data-placeholder=""></span>
+          </div>
 
-            <div class="form-group row">
-              <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
+          <div class="wrap-input100 validate-input" data-validate = "Enter username">
+            <input
+                id="email"
+                type="email"
+                class="input100"
+                name="email"
+                value
+                required
+                autofocus
+                v-model="form.email"
+            />
+            <span class="focus-input100" data-placeholder=""></span>
+          </div>
 
-              <div class="col-md-6">
-                <input
-                    id="email"
-                    type="email"
-                    class="form-control"
-                    name="email"
-                    value
-                    required
-                    autofocus
-                    v-model="form.email"
-                />
-              </div>
-            </div>
+          <div class="wrap-input100 validate-input" data-validate="Enter password">
+            <input
+                id="password"
+                type="password"
+                class="input100"
+                name="password"
+                required
+                v-model="form.password"
+            />
+            <span class="focus-input100" data-placeholder=""></span>
+          </div>
 
-            <div class="form-group row">
-              <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+         
 
-              <div class="col-md-6">
-                <input
-                    id="password"
-                    type="password"
-                    class="form-control"
-                    name="password"
-                    required
-                    v-model="form.password"
-                />
-              </div>
-            </div>
+          <div class="container-login100-form-btn">
+            <button class="login100-form-btn" type="submit">
+              Register
+            </button>
+          </div>
 
-            <div class="form-group row mb-0">
-              <div class="col-md-8 offset-md-4">
-                <button type="submit" class="btn btn-primary">Register</button>
-              </div>
-            </div>
-          </form>
-        </div>
+          <div class="text-center p-t-90">
+            <a class="txt1" href="login">
+              Already have an account?
+            </a>
+          </div>
+      
+        </form>
       </div>
     </div>
   </div>
-  <!--    </div>-->
-
 </template>
+
 
 <script>
 import firebase from "firebase";

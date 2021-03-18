@@ -25,14 +25,16 @@
               </ul>
             </template>
             <template v-else>
-                <ul>
+                 <div class="collapse navbar-collapse">
+              <ul class="nav navbar-nav navbar-right">        
                   <li class="nav-item">
-                    <router-link to="/login" class="nav-link">Login</router-link>
+                    <router-link to="/login" class="nav-link">LOGIN</router-link>
                   </li>
-                  <li class="nav-item">
-                    <router-link to="/register" class="nav-link">Register</router-link>
+                  <li class="nav-item" >
+                    <router-link to="/register" class="nav-link">REGISTER</router-link>
                   </li>
                 </ul>
+                 </div>
             </template>
 <!--            <router-link to="/login">LOG IN/ REGISTER</router-link>-->
           </li>

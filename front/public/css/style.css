@@ -436,7 +436,7 @@ footer .fa {
   top: -0.5em;  /* margin-top doesn't work */
   top: calc(var(--star-size) / 6 * -1em);
   margin-left: -2.5em;  /* overlap the radio buttons exactly under the stars */
-  margin-left: calc(var(--star-size) / 6 * -5em);
+  margin-left: calc(var(--star-size) / 6 * -3em);
   z-index: 2;  /* bring the button above the stars so it captures touches/clicks */
   opacity: 0;  /* comment to see where the radio buttons are */
   font-size: initial; /* reset to default */
