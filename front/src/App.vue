@@ -16,6 +16,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  
 }
 #nav {
   padding: 30px;
@@ -33,6 +34,7 @@
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
+  
 }
 .v-main__wrap {
   padding: 16px;
@@ -46,7 +48,8 @@
   position: relative;
   width: 100%;
   text-align: left;
-  padding-left: 16px;
+  margin-bottom: 10px;
+  font-family: monospace;
 }
 .v-card__actions {
   padding: 0 !important;
@@ -63,9 +66,35 @@
   padding: 0px 10px;
   border: 1px solid red;
   margin-left: 10px;
+
+
   /* margin-bottom: 10px; */
 }
 .text-actions {
   text-align: right;
+   font-family: monospace;
+}
+.parent-form {
+  position: relative;
+  float: left;
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 80px;
+  border-radius: 20px;
+  padding: 30px;
+  background-color: #fff;
+  box-shadow: 0px 0px 20px 8px #d3d3d3;
+}
+.images span img {
+  max-width: 300px;
+  max-height: 300px;
+  min-width: 300px;
+  min-height: 300px;
+  object-fit: contain;
+  object-position: center;
+  box-shadow: 0px 0px 13px 3px #d3d3d3;
+}
+.table-parent .theme--light.v-data-table {
+  box-shadow: 0px 0px 20px 8px #d3d3d3;
 }
 </style>

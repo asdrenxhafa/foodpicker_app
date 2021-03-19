@@ -1,6 +1,6 @@
 <template  v-slot:default>
-  <div>
-    <h1 class="title">Restaurants</h1>
+  <div class="table-parent">
+    <h1 class="title">Restaurants List</h1>
     <v-simple-table class="restaurant-parent">
       <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
       <template>
@@ -87,4 +87,7 @@ export default {
 </script>
 
 <style scoped>
+.text-left{
+  font-family:monospace;
+}
 </style>

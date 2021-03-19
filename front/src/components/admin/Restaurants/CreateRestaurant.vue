@@ -1,52 +1,73 @@
 <template>
-  <v-form ref="form" v-model="valid" lazy-validation @submit="onSubmit">
-    <v-text-field
-      v-model="restaurant.name"
-      :counter="10"
-      :rules="nameRules"
-      label="Name"
-      required
-    ></v-text-field>
-    <v-text-field
-      v-model="restaurant.description"
-      label="Description"
-      required
-    ></v-text-field>
+  <v-app>
+    <v-app-bar app color="indigo" dark>
+      <div class="header-parent">
+        <div>
+          <v-btn text>Restaurants</v-btn>
+        </div>
+        <div>
+          <v-btn right color="indigo" dark v-on:click="createres('Admin')"
+            >Go back</v-btn>
+        </div>
+      </div>
+    </v-app-bar>
+    <div class="parent-form">
+      <v-form ref="form" v-model="valid" lazy-validation @submit="onSubmit">
+        <v-text-field
+          v-model="restaurant.name"
+          :counter="10"
+          :rules="nameRules"
+          label="Name"
+          class="input-form"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="restaurant.description"
+          label="Description"
+          required
+        ></v-text-field>
 
-    <v-file-input
-      v-model="restaurnt_image"
-      show-size
-      counter
-      multiple
-      label="Foto"
-    >
-    </v-file-input>
+        <v-file-input
+          v-model="restaurnt_image"
+          show-size
+          counter
+          multiple
+          label="Image"
+        >
+        </v-file-input>
 
-    <v-text-field
-      v-model="restaurant.location[0].city"
-      label="Qyteti"
-      required
-    ></v-text-field>
+        <v-text-field
+          v-model="restaurant.location[0].city"
+          label="City"
+          required
+        ></v-text-field>
 
-    <v-text-field
-      v-model.trim="restaurant.location[0].street"
-      label="Rruga"
-      required
-    ></v-text-field>
+        <v-text-field
+          v-model.trim="restaurant.location[0].street"
+          label="Street"
+          required
+        ></v-text-field>
 
-    <v-text-field
-      v-model="restaurant.telephone"
-      :counter="9"
-      :rules="telRules"
-      label="Phone Number"
-      required
-    ></v-text-field>
-    <v-btn :disabled="!valid" color="success" class="mr-4" @click="onSubmit">
-      Shto
-    </v-btn>
+        <v-text-field
+          v-model="restaurant.telephone"
+          :counter="9"
+          :rules="telRules"
+          label="Phone Number"
+          required
+        ></v-text-field>
+        <v-btn
+          :disabled="!valid"
+          color="success"
+          class="mr-4"
+          @click="onSubmit"
+        >
+          Add Restaurant
+        </v-btn>
 
-    <v-btn color="error" class="mr-4" @click="reset"> Reseto Formen </v-btn>
-  </v-form>
+        <v-btn color="error" class="mr-4" @click="reset"> Rest Form </v-btn>
+      </v-form>
+    </div>
+  </v-app>
 </template>
 
 <script>
@@ -92,6 +113,7 @@ export default {
   },
   methods: {
     onSubmit(evt) {
+      this.$refs.form.validate();
       var formData = new FormData();
       formData.append("image", this.restaurnt_image[0]);
       formData.append("restaurant_name", this.restaurant.name);
@@ -127,6 +149,11 @@ export default {
     },
     reset() {
       this.$refs.form.reset();
+    },
+    createres(routeName) {
+      this.$router.push({
+        name: routeName,
+      });
     },
   },
 };
