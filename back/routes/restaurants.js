@@ -56,7 +56,13 @@ router.post('/',upload.single('image'),function(req,res,next){
                 street: req.body.restaurant_location_street
             }
         ],
-        telephone: req.body.restaurant_telephone
+        telephone: req.body.restaurant_telephone,
+        hours:[
+            {
+                from:req.body.restaurant_hours_from,
+                to:req.body.restaurant_hours_to
+            }
+        ]
     }
 
     Restaurant.create(restaurant,function(err,post){

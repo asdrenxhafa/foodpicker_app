@@ -38,7 +38,19 @@ const RestaurantSchema = mongoose.Schema({
     telephone:{
         type:String,
         required:true
-    }
+    },
+    hours:[
+        {
+            from:{
+                type:String,
+                required:true
+            },
+            to:{
+                type:String,
+                required:true
+            }
+        }
+    ]
     
 
 

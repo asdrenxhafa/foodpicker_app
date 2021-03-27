@@ -55,6 +55,16 @@
           label="Phone Number"
           required
         ></v-text-field>
+        <v-text-field
+          v-model="restaurant.hours[0].from"
+          label="Orari Prej"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="restaurant.hours[0].to"
+          label="Orari Deri"
+          required
+        ></v-text-field>
         <v-btn
           :disabled="!valid"
           color="success"
@@ -94,6 +104,12 @@ export default {
           },
         ],
         telephone: "",
+        hours:[
+          {
+            from:'',
+            to:''
+          }
+        ]
       },
       valid: true,
       name: "",
@@ -132,6 +148,8 @@ export default {
         this.restaurant.location[0].street
       );
       formData.append("restaurant_telephone", this.restaurant.telephone);
+      formData.append("restaurant_hours_from", this.restaurant.hours[0].from);
+      formData.append("restaurant_hours_to", this.restaurant.hours[0].to);
 
       evt.preventDefault();
       axios
