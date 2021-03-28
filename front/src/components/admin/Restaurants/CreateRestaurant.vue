@@ -84,6 +84,11 @@
 import axios from "axios";
 export default {
   name: "CreateRestaurant",
+  created(){
+    if(localStorage.getItem('token')===null){
+      this.$router.push('/AdminLogin');
+    }
+  },
   data() {
     return {
       restaurnt_image: null,

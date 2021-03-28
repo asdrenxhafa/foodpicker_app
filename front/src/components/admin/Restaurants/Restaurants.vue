@@ -52,10 +52,14 @@ export default {
     };
   },
   created() {
+    if(localStorage.getItem('token')===null){
+      this.$router.push('/AdminLogin');
+    }
     axios
       .get("http://localhost:4000/restaurants")
       .then((res) => (this.restaurants = res.data))
       .catch();
+
   },
   methods: {
     editres(restaurant) {

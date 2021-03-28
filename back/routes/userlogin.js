@@ -5,7 +5,7 @@ var router=express.Router();
 var bcrypt=require('bcrypt');
 var jwt = require('jsonwebtoken');
 
-router.post('/',(req,res,next)=>{
+router.post('/login',(req,res,next)=>{
     User.findOne({email:req.body.email},(err,user)=>{
         if(err) return res.status(500).json({
             title:'Server error',
@@ -23,8 +23,7 @@ router.post('/',(req,res,next)=>{
                 error:'Invalid Credentials'
             })
         }
-        let token=jwt.sign({userId:user._id}, 'SECRETKEY');
-        
+        let token=jwt.sign({userId:user._id}, 'secretkey123');
 
     })
 })

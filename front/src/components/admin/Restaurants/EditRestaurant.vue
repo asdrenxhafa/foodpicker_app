@@ -95,6 +95,9 @@ export default {
     };
   },
   created() {
+    if(localStorage.getItem('token')===null){
+      this.$router.push('/AdminLogin');
+    }
     axios
       .get(`http://localhost:4000/restaurants/` + this.$route.params.id)
       .then((res) => {
