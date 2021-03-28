@@ -41,10 +41,12 @@ app.post('/register',(req,res,next)=>{
   })
 app.post('/login',(req,res,next)=>{
     User.findOne({email:req.body.email},(err,user)=>{
+
         if(err) return res.status(500).json({
             title:'Server error',
             error:err
         })
+
         if(!user){
             return res.status(401).json({
                 title:'User not found',
@@ -57,8 +59,9 @@ app.post('/login',(req,res,next)=>{
                 error:'Invalid Credentials'
             })
         }
-        // let token=jwt.sign({userId:user._id}, 'SECRETKEY');
 
+        let token=jwt.sign({userId:user._id}, 'SECRETKEY');
+        res.json(token);
     })
 })
 

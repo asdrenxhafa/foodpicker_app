@@ -1,10 +1,5 @@
 <template>
   <div class="hello">
-    <!-- preloader section -->
-    <!-- preloader section -->
-    <section class="preloader">
-      <div class="sk-spinner sk-spinner-pulse"></div>
-    </section>
 
     <Navbar></Navbar>
 

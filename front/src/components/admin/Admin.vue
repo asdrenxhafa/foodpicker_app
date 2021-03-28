@@ -7,7 +7,6 @@
             Restaurants
           </v-btn>
 
-          <v-btn text v-on:click="changeBodyState('food')"> Foods </v-btn>
         </div>
         <div>
           <v-btn
@@ -35,9 +34,6 @@
         <Restaurants></Restaurants>
       </template>
 
-      <template v-if="this.restaurantOrFoods === 'food'">
-        <Foods></Foods>
-      </template>
 
       <router-view />
     </v-main>
@@ -47,13 +43,17 @@
 
 <script>
 import Restaurants from "@/components/admin/Restaurants/Restaurants";
-import Foods from "@/components/admin/Foods/Foods";
 export default {
-  components: { Foods, Restaurants },
+  components: { Restaurants },
   data() {
     return {
       restaurantOrFoods: "restaurants",
     };
+  },
+  created(){
+    if(localStorage.getItem('token')===null){
+      this.$router.push('/AdminLogin');
+    }
   },
   methods: {
     changeBodyState(name) {

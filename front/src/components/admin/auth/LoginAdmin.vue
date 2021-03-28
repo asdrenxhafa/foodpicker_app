@@ -88,7 +88,7 @@ export default {
       .then(res =>{
             console.log(res);
             localStorage.setItem('token',res.data.token);
-            this.$router.push('/');
+            this.$router.push('/admin');
       },err=>{
         this.error= err.response.data.error
       })

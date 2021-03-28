@@ -13,7 +13,6 @@
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#home" class="smoothScroll">HOME</a></li>
-          <li><a href="#restaurant" class="smoothScroll">RESTAURANTS</a></li>
           <li><a href="#contact" class="smoothScroll mr-4">CONTACT</a></li>
           <li>
             <template v-if="user.loggedIn">

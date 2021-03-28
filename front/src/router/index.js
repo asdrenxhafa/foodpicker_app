@@ -7,7 +7,9 @@ import Register from '../components/auth/Register'
 // import Admin from '../components/admin/Admin';
 import EditRestaurant from '../components/admin/Restaurants/EditRestaurant';
 import CreateRestaurant from '../components/admin/Restaurants/CreateRestaurant';
-import LoginAdmin from '../components/admin/auth/LoginAdmin';
+import LoginAdmin from "@/components/admin/auth/LoginAdmin";
+import Admin from "@/components/admin/Admin";
+import RegisterAdmin from "@/components/admin/auth/RegisterAdmin";
 
 Vue.use(VueRouter)
 
@@ -30,7 +32,7 @@ const routes = [
   {
     path: '/admin',
     name: 'Admin',
-    component: LoginAdmin
+    component: Admin
   },
   {
     path: '/admin/editrestaurant',
@@ -41,6 +43,16 @@ const routes = [
     path: '/admin/createrestaurant',
     name: 'CreateRestaurant',
     component: CreateRestaurant
+  },
+  {
+    path: '/AdminLogin',
+    name: 'CreateRestaurant',
+    component: LoginAdmin
+  },
+  {
+    path: '/AdminRegister',
+    name: 'CreateRestaurant',
+    component: RegisterAdmin
   },
 
 ]
