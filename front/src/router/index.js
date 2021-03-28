@@ -4,9 +4,10 @@ import VueRouter from 'vue-router'
 import Main from '../components/Main'
 import Login from '../components/auth/Login'
 import Register from '../components/auth/Register'
-import Admin from '../components/admin/Admin';
+// import Admin from '../components/admin/Admin';
 import EditRestaurant from '../components/admin/Restaurants/EditRestaurant';
 import CreateRestaurant from '../components/admin/Restaurants/CreateRestaurant';
+import LoginAdmin from '../components/admin/auth/LoginAdmin';
 
 Vue.use(VueRouter)
 
@@ -29,7 +30,7 @@ const routes = [
   {
     path: '/admin',
     name: 'Admin',
-    component: Admin
+    component: LoginAdmin
   },
   {
     path: '/admin/editrestaurant',
