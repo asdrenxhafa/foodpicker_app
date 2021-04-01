@@ -1,2 +1,2 @@
 # foodpicker_app
-Vuejs and Nodejs foodpicker web app.
+🌔 Vuejs and Nodejs foodpicker web app.
