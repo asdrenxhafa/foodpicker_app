@@ -11,8 +11,11 @@ class Order extends Model
     protected $table = 'orders';
 
     protected $fillable = [
-        'client',
-        'oder_type_id'
+        'title',
+        'number',
+        'details',
+        'location',
+        'telephone'
     ];
 
     use HasFactory;

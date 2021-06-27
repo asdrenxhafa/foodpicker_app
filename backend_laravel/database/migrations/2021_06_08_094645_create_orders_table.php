@@ -15,14 +15,14 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('client');
-            $table->unsignedBigInteger('oder_type_id');
+            $table->string('title');
+            $table->string('number');
             $table->string('details');
             $table->string('location');
+            $table->string('telephone');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('order_type_id')->references('id')->on('order_types');
         });
     }
 
