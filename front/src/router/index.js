@@ -10,6 +10,7 @@ import CreateRestaurant from '../components/admin/Restaurants/CreateRestaurant';
 import LoginAdmin from "@/components/admin/auth/LoginAdmin";
 import Admin from "@/components/admin/Admin";
 import RegisterAdmin from "@/components/admin/auth/RegisterAdmin";
+import Payments from "@/components/Payments";
 
 Vue.use(VueRouter)
 
@@ -53,6 +54,11 @@ const routes = [
     path: '/AdminRegister',
     name: 'CreateRestaurant',
     component: RegisterAdmin
+  },
+  {
+    path: '/Payments',
+    name: 'Payments',
+    component: Payments
   },
 
 ]
