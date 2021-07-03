@@ -113,69 +113,17 @@
 
 
 <script>
-import axios from "axios";
 
 export default {
   name: "Payments",
-
+  props:['cart'],
   data() {
     return {
-      //   axios
-      //       .post({
-      //     url: '/company/premium/pay',
-      //     type: 'POST',
-      //     headers: {
-      //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      //     },
-      //     data: {
-      //       first_name: document.getElementById('fname').value,
-      //       last_name: document.getElementById('lname').value,
-      //       address: document.getElementById('address').value,
-      //       city: document.getElementById('city').value,
-      //       state: document.getElementById('state2').value,
-      //       country: document.getElementById('billingcountry').value,
-      //       email: document.getElementById('email').value,
-      //       zip_code: document.getElementById('zipcode').value,
-      //       ccnumber: document.getElementById('tiCNumber').value,
-      //       cvv: document.getElementById('tiCVV').value,
-      //       expire_month: document.getElementById('cbExpMounth').value,
-      //       expire_year: document.getElementById('cbExpYear').value,
-      //       days: {{ $days }},
-      //   product: 'PRODUCT' + {{ $productId }}
-      // },
-      //   success: function (e) {
-      //     window.location = '/company';
-      //   },
-      //   error: function (er) {
-      //     console.log(er);
-      //   }
-      // });
-      // })
     }
   },
 
   methods:{
-    makePayment(){
-      axios.post('/standup/'+ this.standup_id +'', {
-        first_name: document.getElementById('fname').value,
-        last_name: document.getElementById('lname').value,
-        address: document.getElementById('address').value,
-        city: document.getElementById('city').value,
-        state: document.getElementById('state2').value,
-        country: document.getElementById('billingcountry').value,
-        email: document.getElementById('email').value,
-        zip_code: document.getElementById('zipcode').value,
-        ccnumber: document.getElementById('tiCNumber').value,
-        cvv: document.getElementById('tiCVV').value,
-        expire_month: document.getElementById('cbExpMounth').value,
-        expire_year: document.getElementById('cbExpYear').value,
-        product: 'PRODUCT' + '1',
-          })
-          .then(response => console.log(response))
-          .catch(e => {
-            console.log(e);
-          })
-    }
+
 
   }
 

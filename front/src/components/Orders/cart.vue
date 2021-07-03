@@ -28,14 +28,14 @@
         </div>   
         <div class="row">
             <div class="col-md-10 col-md-offset-1 checkout">
-                <button type="button" class=" btn btn-custom btn-lg">Checkout</button>
+              <button type="button" class=" btn btn-custom btn-lg" @click="checkoutButton()">Checkout</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 
 export default {
   props:['cart'],
@@ -60,7 +60,24 @@ export default {
       this.$emit('emptyCart');
     },
     checkoutButton(){
-      axios.post()
+      // axios.post('/standup', {
+      //   title     : this.q1,
+      //   number    : this.q2,
+      //   details   : this.q3,
+      //   location  : this.q3,
+      //   telephone : this.q3,
+      // })
+      //     .then(response => console.log(response))
+      //
+      //     .catch(e => {
+      //       console.log(e);
+      //     })
+      // this.$emit('doPayment');
+      // this.$parent.$attrs.doingPayment =true;
+      if(this.getTotal != 0){
+        this.$parent.doingPayment = true;
+        this.$parent.total = this.getTotal;
+      }
     }
   },
   computed:{

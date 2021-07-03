@@ -27,6 +27,11 @@ const routes = [
     component: Order
   },
   {
+    path: '/Payments',
+    name: 'Payments',
+    component: Payments
+  },
+  {
     path: '/login',
     name: 'Login',
     component: Login
@@ -60,12 +65,7 @@ const routes = [
     path: '/AdminRegister',
     name: 'CreateRestaurant',
     component: RegisterAdmin
-  },
-  {
-    path: '/Payments',
-    name: 'Payments',
-    component: Payments
-  },
+  }
 
 ]
 
