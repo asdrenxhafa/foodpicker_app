@@ -11,6 +11,7 @@ import LoginAdmin from "@/components/admin/auth/LoginAdmin";
 import Admin from "@/components/admin/Admin";
 import RegisterAdmin from "@/components/admin/auth/RegisterAdmin";
 import Payments from "@/components/Payments";
+import Order from "@/components/Order";
 
 Vue.use(VueRouter)
 
@@ -19,6 +20,11 @@ const routes = [
     path: '/',
     name: 'Main',
     component: Main
+  },
+  {
+    path: '/Order',
+    name: 'Order',
+    component: Order
   },
   {
     path: '/login',
