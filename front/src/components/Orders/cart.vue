@@ -8,7 +8,7 @@
         <div class="row cart-container">
             <div class="col-md-12">
                 <ul class="list-group">
-                    <li class="list-group-item" v-for="item in cart">
+                    <li class="list-group-item" v-for="item in cart" :key="item.id">
                       <span class="col-md-7 food-name">{{item.details.name}}</span>
                       <span class="col-md-2 quantity-wrapper">
                         X <span class="pull-right">{{item.quantity}}</span>
@@ -35,12 +35,20 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   props:['cart'],
   data() {
     return {
       total:0
     };
+  },
+  mounted(){
+    this.$root.$on('addToCart', (food) => {
+
+      this.total += food.price;
+    })
   },
   methods:{
     getSubTotal: function(price,quantity){
@@ -51,7 +59,9 @@ export default {
       this.total = 0;
       this.$emit('emptyCart');
     },
-    
+    checkoutButton(){
+      axios.post()
+    }
   },
   computed:{
     getTotal:function(){

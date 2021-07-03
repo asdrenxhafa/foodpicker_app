@@ -5,7 +5,7 @@
             <div class="panel-heading bg-color"> <span>{{foods[0].category}}</span></div>
             
             <ul class="list-group">
-                <li class="list-group-item" v-for="food in foods" >
+                <li class="list-group-item" v-for="food in foods" :key="food.id" >
                     <div class="veg-flag lfloat">
                         <!-- if veg item -->
                         <span class="veg glyphicon glyphicon-flag" v-if="food.vegflag == 'veg'"></span>
@@ -26,12 +26,12 @@
                     <!-- item end-->
 
                     <!-- add to cart -->
-                    <addToCart :food="food" @removeFromCart="removeFromCart($event)" @addToCart="addToCart($event)"></addToCart>
+                    <add-to-cart :food="food" @removeFromCart="removeFromCart($event)" @addToCart="addToCart($event)"></add-to-cart>
                     <!-- add to cart end-->
                     
                     <!-- itme price -->
                     <div class="item-price rfloat">
-                        <span class="price"><span class="rs-sign">&#8377;</span>{{food.price}}</span>
+                        <span class="price"><span class="fa-euro"></span>{{food.price}}</span>
                     </div>
                 </li>
             </ul>
@@ -40,8 +40,10 @@
 </template>
 
 <script>
+import AddToCart from "@/components/Orders/addToCart";
 export default {
-    props:['foods'],
+  components: {AddToCart},
+  props:['foods'],
   data() {
     return {
       

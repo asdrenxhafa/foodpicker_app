@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-6 food-list-wrapper">
           <div class="food-list-container">
-            <div v-for="food in foodList">
+            <div v-for="food in foodList" :key="food.id">
               <food-list :foods="food" v-on:addToCart="addToCart($event)" v-on:removeFromCart="removeFromCart($event)"></food-list>
             </div>
           </div>
@@ -83,9 +83,27 @@ export default {
   created(){
     var self=this;
 
-    this.$http.get('https://thesmartq.firebaseio.com/menu.json').then(function(data){
-      self.foodData = data.body;
-    });
+
+    self.foodData = [
+      {
+          id          : 1,
+          name        : "Testi1",
+          description : "asd",
+          price       : 11
+      },
+      {
+        id          : 2,
+        name        : "Testi2",
+        description : "asd",
+        price       : 22
+      },
+      {
+        id          : 3,
+        name        : "Testi3",
+        description : "asd",
+        price       : 33
+      },
+    ];
 
   }
 };
@@ -132,4 +150,53 @@ a {
   max-height: calc(100vh - 150px);
   overflow: auto;
 }
+body{
+  color: #76430f !important;
+}
+
+.lfloat{
+  float: left;
+}
+
+.rfloat{
+  float: right;
+}
+.custom-container{
+  min-height: calc(100vh - 100px);
+  padding: 15px;
+}
+
+.container-shadow{
+  box-shadow: 0 1px 5px 3px rgba(0, 0, 0, 0.085) !important;
+}
+
+.bg-color,
+.bg-color:hover,
+.bg-color:active,
+.bg-color:link {
+  background: #ffcc33 !important;
+
+  border: none;
+  color: #76430f !important;
+}
+
+.btn-custom{
+  color: #76430f;
+  background-color: #ffcc33;
+  border-color: #D7A612;
+  box-shadow: 1px 1px 2px 0px #ccc;
+
+}
+
+
+
+.btn-custom:hover{
+  background: #ffdd76;
+
+}
+
+
+
+
+
 </style>

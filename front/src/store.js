@@ -6,7 +6,8 @@ export default new Vuex.Store({
         user: {
             loggedIn: false,
             data: null
-        }
+        },
+        reset:false
     },
     getters: {
         user(state){
@@ -19,6 +20,12 @@ export default new Vuex.Store({
         },
         SET_USER(state, data) {
             state.user.data = data;
+        },
+        emptyCart(state) {
+            state.reset = true;
+        },
+        resetCart(state) {
+            state.reset = false;
         }
     },
     actions: {
