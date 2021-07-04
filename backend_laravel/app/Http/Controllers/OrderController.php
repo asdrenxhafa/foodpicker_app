@@ -25,11 +25,12 @@ class OrderController extends Controller
 
     public function store(OrderRequest $request)
     {
-        dd(1);
-        $data = $request->validated();
-
-        $order = new Order($data);
-        $order->saveOrFail();
+        $order = Order::create([
+            'title' => $request->title,
+            'details' => $request->details,
+            'location' => $request->location,
+            'telephone' => $request->telephone
+        ]);
 
         $this->finishCreditCardPayment($request);
 

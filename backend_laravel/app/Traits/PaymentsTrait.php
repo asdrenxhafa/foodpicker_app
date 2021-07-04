@@ -85,14 +85,14 @@ trait PaymentsTrait
 
         $Order->BillingDetails              = new \stdClass();
         $Order->BillingDetails->Address1    = $params['address'] ?? "test";
-        $Order->BillingDetails->City        = $params['city'] ?? "test"; //not null
-        $Order->BillingDetails->State       = $params['state'] ?? "test";
-        $Order->BillingDetails->CountryCode = $params['country_code'] ?? "test";
+        $Order->BillingDetails->City        = $params['city'] ?? "Prishtina"; //not null
+        $Order->BillingDetails->State       = $params['state'] ?? "Kosovo";
+        $Order->BillingDetails->CountryCode = $params['country_code'] ?? "XK";
         $Order->BillingDetails->Phone       = $params['phone_number'] ?? "test";
-        $Order->BillingDetails->Email       = $params['email'] ?? "test";
+        $Order->BillingDetails->Email       = $params['email'] ?? "test@gmail.com";
         $Order->BillingDetails->FirstName   = $params['first_name'] ?? "test";
         $Order->BillingDetails->LastName    = $params['last_name'] ?? "test";
-        $Order->BillingDetails->Zip         = $params['zip_code'] ?? "test"; //not null
+        $Order->BillingDetails->Zip         = $params['zip_code'] ?? "42000"; //not null
 
         $Order->DeliveryDetails                 = new \stdClass();
         $Order->DeliveryDetails->Address1       = $params['address'] ?? "test";
