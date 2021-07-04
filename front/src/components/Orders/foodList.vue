@@ -31,7 +31,7 @@
                     
                     <!-- itme price -->
                     <div class="item-price rfloat">
-                        <span class="price"><span class="fa-euro"></span>{{food.price}}</span>
+                        <span class="price"><span></span> ${{food.price}}</span>
                     </div>
                 </li>
             </ul>

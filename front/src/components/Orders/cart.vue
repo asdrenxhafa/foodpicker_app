@@ -14,7 +14,7 @@
                         X <span class="pull-right">{{item.quantity}}</span>
                       </span>  
                       <span class="sub-total col-md-3">
-                        <span class="rs-sign">&#8377;</span>
+                        <span class="rs-sign">$</span>
                         {{getSubTotal(item.details.price, item.quantity)}}
                       </span>
                     </li>
@@ -23,7 +23,7 @@
         </div>   
         <div class="row">
             <div class="col-md-12 total-price-wrapper">
-                <h3>Total: <span class="total-price pull-right"> <span class="rs-sign">&#8377;</span> {{getTotal}}</span></h3>
+                <h3>Total: <span class="total-price pull-right"> <span class="rs-sign">$</span> {{getTotal}}</span></h3>
             </div>
         </div>   
         <div class="row">
