@@ -13,6 +13,7 @@
 					</span>
 
            <div class="wrap-input100 validate-input" data-validate = "Enter username">
+           <h3>Username</h3>
             <input
                 id="username"
                 type="text"
@@ -27,6 +28,7 @@
           </div>
 
           <div class="wrap-input100 validate-input" data-validate = "Enter username">
+          <h3>Email Address</h3>
             <input
                 id="email"
                 type="email"
@@ -41,6 +43,7 @@
           </div>
 
           <div class="wrap-input100 validate-input" data-validate="Enter password">
+          <h3>Password</h3>
             <input
                 id="password"
                 type="password"

@@ -3,41 +3,36 @@
   <section class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
-        <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="icon icon-bar"></span>
-          <span class="icon icon-bar"></span>
-          <span class="icon icon-bar"></span>
-        </button>
-        <a href="#" class="navbar-brand">FOODPICKER</a>
+        <a class="nav navbar-nav navbar-right" style="color:gray;text-align:right; font-size:20px; text-shadow: 1px 1px;">FOODPICKER</a>
       </div>
       <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#home" class="smoothScroll">HOME</a></li>
-          <li><a href="/Order" class="smoothScroll mr-4">Order</a></li>
+     
+          <li><a href="#home" class="smoothScroll mr-4" style="color:gray;text-align:center; text-shadow: 1px 1px; font-size:15px;" ><b>HOME</b></a></li>
+          <li><a href="/Order" class="smoothScroll mr-4" style="color:gray;text-align:center;text-shadow: 1px 1px; font-size:15px;"><b>ORDER</b></a></li>
           <li>
             <template v-if="user.loggedIn">
               <div class="nav-item">{{user.data.displayName}}</div>
-              <ul>
+              
                   <li class="nav-item">
-                    <a class="nav-link" @click.prevent="signOut">Sign out</a>
+                    <a class="nav-link" @click.prevent="signOut" style="color:gray;text-align:center; text-shadow: 1px 1px"><b>Sign out</b></a>
                   </li>
-              </ul>
+              
             </template>
             <template v-else>
                  <div class="collapse navbar-collapse">
-              <ul class="nav navbar-nav navbar-right">        
+                  
                   <li class="nav-item">
-                    <router-link to="/login" class="nav-link">LOGIN</router-link>
+                    <router-link to="/login" class="nav-link" style="color:gray;text-align:center;text-shadow: 1px 1px; font-size:15px;"><b>LOGIN</b></router-link>
                   </li>
                   <li class="nav-item" >
-                    <router-link to="/register" class="nav-link">REGISTER</router-link>
+                    <router-link to="/register" class="nav-link" style="color:gray;text-align:center; text-shadow: 1px 1px;font-size:15px;"><b>REGISTER</b></router-link>
                   </li>
-                </ul>
+               
                  </div>
             </template>
-<!--            <router-link to="/login">LOG IN/ REGISTER</router-link>-->
+
           </li>
-        </ul>
+      
       </div>
     </div>
   </section>
