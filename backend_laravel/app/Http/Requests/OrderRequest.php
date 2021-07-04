@@ -16,7 +16,6 @@ class OrderRequest extends FormRequest
     {
         return [
             'title'         => ['required'],
-            'number'        => ['required'],
             'details'       => ['required'],
             'location'      => ['required'],
             'telephone'     => ['required'],

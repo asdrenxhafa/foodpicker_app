@@ -113,6 +113,7 @@
       <excludeFolder url="file://$MODULE_DIR$/backend_laravel/vendor/psr/http-client" />
       <excludeFolder url="file://$MODULE_DIR$/backend_laravel/vendor/psr/event-dispatcher" />
       <excludeFolder url="file://$MODULE_DIR$/backend_laravel/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/backend_laravel/vendor/barryvdh/laravel-cors" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

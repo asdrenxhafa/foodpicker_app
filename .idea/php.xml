@@ -107,6 +107,7 @@
       <path value="$PROJECT_DIR$/backend_laravel/vendor/psr/http-client" />
       <path value="$PROJECT_DIR$/backend_laravel/vendor/psr/event-dispatcher" />
       <path value="$PROJECT_DIR$/backend_laravel/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/backend_laravel/vendor/barryvdh/laravel-cors" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

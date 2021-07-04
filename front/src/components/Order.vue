@@ -25,7 +25,7 @@
 
 
 
-    <div class="container rounded bg-white" v-if="doingPayment === true">
+    <div class="container rounded bg-white" v-show="doingPayment === true">
       <div class="row d-flex justify-content-center pb-5">
         <div class="col-sm-5 col-md-5 ml-1">
           <div class="py-4 d-flex flex-row">
@@ -45,6 +45,35 @@
             <div class="ml-auto p-2">OAP</div>
           </div>
           <hr>
+          <div class="d-flex pt-2">
+            <form class="form" role="form" autocomplete="off">
+
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <label for="cc_name">First Name</label>
+                  <input v-model="first_name" type="text" class="form-control" id="cc_name" title="First and last name"
+                         required="required">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="cc_name">Last Name</label>
+                  <input v-model="last_name" type="text" class="form-control" id="cc_name" title="First and last name"
+                         required="required">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Phone Number (please start with +383)</label>
+                <input v-model="phone_number" type="text" class="form-control" autocomplete="off" maxlength="20" pattern="\d{16}"
+                       title="Phone Number" required="">
+              </div>
+              <div class="form-group">
+                <label class="col-md-12">Location</label>
+                  <input v-model="location" type="text" class="form-control" autocomplete="off"
+                         title="Three digits at back of your card" required="required">
+              </div>
+
+            </form>
+          </div>
         </div>
         <div class="col-sm-3 col-md-4 offset-md-1 mobile">
           <div class="py-4 d-flex justify-content-end">
@@ -58,21 +87,21 @@
 
               <h3 class="text-center">Credit Card Payment</h3>
               <hr>
-              <form class="form" role="form" autocomplete="off">
+              <form onsubmit="return false" class="form" role="form" autocomplete="off">
                 <div class="form-group">
                   <label for="cc_name">Card Holder's Name</label>
-                  <input type="text" class="form-control" id="cc_name" pattern="\w+ \w+.*" title="First and last name"
+                  <input v-model="holder_name" type="text" class="form-control" id="cc_name" pattern="\w+ \w+.*" title="First and last name"
                          required="required">
                 </div>
                 <div class="form-group">
                   <label>Card Number</label>
-                  <input type="text" class="form-control" autocomplete="off" maxlength="20" pattern="\d{16}"
+                  <input v-model="ccnumber" type="text" class="form-control" autocomplete="off" maxlength="20" pattern="\d{16}"
                          title="Credit card number" required="">
                 </div>
                 <div class="form-group row">
                   <label class="col-md-12">Card Exp. Date</label>
                   <div class="col-md-4">
-                    <select class="form-control" name="cc_exp_mo" size="0">
+                    <select v-model="expire_month" class="form-control" name="cc_exp_mo" size="0">
                       <option value="01">01</option>
                       <option value="02">02</option>
                       <option value="03">03</option>
@@ -88,7 +117,7 @@
                     </select>
                   </div>
                   <div class="col-md-4">
-                    <select class="form-control" name="cc_exp_yr" size="0">
+                    <select v-model="expire_year" class="form-control" name="cc_exp_yr" size="0">
                       <option>2018</option>
                       <option>2019</option>
                       <option>2020</option>
@@ -97,7 +126,7 @@
                     </select>
                   </div>
                   <div class="col-md-4">
-                    <input type="text" class="form-control" autocomplete="off" maxlength="3" pattern="\d{3}"
+                    <input v-model="cvv" type="text" class="form-control" autocomplete="off" maxlength="3" pattern="\d{3}"
                            title="Three digits at back of your card" required="" placeholder="CVC">
                   </div>
                 </div>
@@ -115,7 +144,7 @@
                     <button type="reset" class="btn btn-default btn-lg btn-block" @click="orderingPage()">Cancel</button>
                   </div>
                   <div class="col-md-6">
-                    <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+                    <button class="btn btn-success btn-lg btn-block" @click="makePayment()">Submit</button>
                   </div>
                 </div>
               </form>
@@ -135,16 +164,26 @@ import Cart from "@/components/Orders/cart";
 import axios from "axios";
 
 export default {
+  name:"Order",
   components: {Cart, SideMenu, FoodList},
   data() {
     return {
-      msg: "Welcome to Your Food Ordering App",
+      // csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       foodData: [],
       cart: [],
 
       doingPayment: false,
 
-      total:0,
+      location      : "",
+      first_name    : "",
+      last_name     : "",
+      phone_number  : "",
+      holder_name   : "",
+      ccnumber      : "",
+      cvv           : "",
+      expire_month  : "",
+      expire_year   : "",
+      total         : 0,
     };
   },
   mounted() {
@@ -183,26 +222,55 @@ export default {
       this.cart = [];
     },
     makePayment() {
-      axios.post('/standup/' + this.standup_id + '', {
-          title         : ['required'],
-          number        : ['required'],
-          details       : ['required'],
-          location      : ['required'],
-          telephone     : ['required'],
-          first_name    : ['required'],
-          last_name     : ['required'],
-          phone_number  : ['required'],
-          holder_name   : ['required'],
-          ccnumber      : ['required'],
-          cvv           : ['required'],
-          expire_month  : ['required'],
-          expire_year   : ['required'],
-          total         : ['required']
-      })
+
+      // axios.get('http://localhost:8000/api/orders')
+      //     .then(response => console.log(response))
+      //     .catch(e => {
+      //       console.log(e);
+      //     })
+
+      // axios.post('http://localhost:8000/api/orders',{
+      //   title         : "Food Order",
+      //   details       : this.orderDetails,
+      //   location      : this.location,
+      //   telephone     : this.phone_number,
+      //   first_name    : this.first_name,
+      //   last_name     : this.last_name,
+      //   phone_number  : this.phone_number,
+      //   holder_name   : this.holder_name,
+      //   ccnumber      : this.ccnumber,
+      //   cvv           : this.cvv,
+      //   expire_month  : this.expire_month,
+      //   expire_year   : this.expire_year,
+      //   total         : this.total
+      // })
+      //     .then(response => console.log(response))
+      //     .catch(e => {
+      //       console.log(e);
+      //     })
+
+
+      var formData = new FormData();
+      formData.append('title', "Food Order");
+      formData.append('details', this.orderDetails);
+      formData.append('location', this.location);
+      formData.append('telephone', this.phone_number);
+      formData.append('first_name', this.first_name);
+      formData.append('last_name', this.last_name);
+      formData.append('phone_number', this.phone_number);
+      formData.append('holder_name', this.holder_name);
+      formData.append('ccnumber', this.ccnumber);
+      formData.append('cvv', this.cvv);
+      formData.append('expire_month', this.expire_month);
+      formData.append('expire_year', this.expire_year);
+      formData.append('total', this.total);
+      formData.append('_method', 'POST');
+      axios.post('http://localhost:8000/api/orders', formData, {})
           .then(response => console.log(response))
           .catch(e => {
             console.log(e);
           })
+
     },
     orderingPage(){
       this.doingPayment = false;
@@ -221,6 +289,15 @@ export default {
 
       });
       return foodByCategory;
+    },
+    orderDetails: function () {
+      var details = "";
+      this.cart.forEach(function (food) {
+
+        details += food.details.name + " quantity:" + food.quantity  + ", ";
+
+      });
+      return details;
     }
 
   },
