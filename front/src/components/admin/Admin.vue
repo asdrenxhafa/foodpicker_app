@@ -6,6 +6,9 @@
           <v-btn text v-on:click="changeBodyState('restaurants')">
             Restaurants
           </v-btn>
+          <v-btn text v-on:click="changeBodyState('orders')">
+            Orders
+          </v-btn>
 
         </div>
         <div>
@@ -17,14 +20,7 @@
             v-if="this.restaurantOrFoods === 'restaurants'"
             >Create New Restaurant</v-btn
           >
-          <v-btn
-            right
-            color="indigo"
-            dark
-            v-on:click="createres('CreateFoods')"
-            v-if="this.restaurantOrFoods === 'food'"
-            >Create New Foods</v-btn
-          >
+          
         </div>
       </div>
     </v-app-bar>
@@ -32,6 +28,9 @@
     <v-main>
       <template v-if="this.restaurantOrFoods === 'restaurants'">
         <Restaurants></Restaurants>
+      </template>
+      <template v-if="this.restaurantOrFoods === 'orders'">
+        <Orders></Orders>
       </template>
 
 
@@ -43,8 +42,9 @@
 
 <script>
 import Restaurants from "@/components/admin/Restaurants/Restaurants";
+import Orders from "./Orders/Orders.vue";
 export default {
-  components: { Restaurants },
+  components: { Restaurants, Orders},
   data() {
     return {
       restaurantOrFoods: "restaurants",
