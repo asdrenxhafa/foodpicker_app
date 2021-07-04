@@ -249,6 +249,11 @@ iframe {
   border-bottom: 2px solid rgba(255,255,255,0.24);
   margin-bottom: 30px;
 }
+.wrap-input100 h3 {
+  color:white;
+  text-align: left; 
+  font-size: 15px;
+}
 
 .input100 {
   font-family: Poppins-Regular;
