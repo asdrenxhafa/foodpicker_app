@@ -15,11 +15,20 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'     => ['required'],
-            'number'    => ['required'],
-            'details'   => ['required'],
-            'location'  => ['required'],
-            'telephone' => ['required']
+            'title'         => ['required'],
+            'number'        => ['required'],
+            'details'       => ['required'],
+            'location'      => ['required'],
+            'telephone'     => ['required'],
+            'first_name'    => ['required'],
+            'last_name'     => ['required'],
+            'phone_number'  => ['required'],
+            'holder_name'   => ['required'],
+            'ccnumber'      => ['required'],
+            'cvv'           => ['required'],
+            'expire_month'  => ['required'],
+            'expire_year'   => ['required'],
+            'total'         => ['required']
         ];
     }
 }

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
+use App\Traits\PaymentsTrait;
 
 class OrderController extends Controller
 {
+
+    use PaymentsTrait;
 
     public function index()
     {
@@ -27,9 +30,10 @@ class OrderController extends Controller
         $order = new Order($data);
         $order->saveOrFail();
 
+        $this->finishCreditCardPayment($request);
+
         return $order;
     }
-
 
     public function update(OrderRequest $request, Order $order)
     {

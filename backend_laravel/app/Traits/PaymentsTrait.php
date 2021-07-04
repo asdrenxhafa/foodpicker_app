@@ -3,10 +3,9 @@
 
 namespace App\Traits;
 
-use App\Company;
+use App\Http\Requests\OrderRequest;
 use App\Http\Requests\PaymentValidation;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Order;
 use SoapClient;
 
 trait PaymentsTrait
@@ -26,25 +25,17 @@ trait PaymentsTrait
         return md5($k_opad . pack("H*", md5($k_ipad . $data)));
     }
 
-    public function finishCreditCardPayment(PaymentValidation $request){
+    public function finishCreditCardPayment(OrderRequest $request){
         $params = [
             'first_name'    => $request->first_name     ?? 'John',
             'last_name'     => $request->last_name      ?? 'Doe',
-            'address'       => $request->address        ?? 'Prishtine',
-            'city'          => $request->city           ?? 'Prishtine',
-            'state'         => $request->state          ?? 'Kosove',
-            'country'       => $request->country        ?? 'Kosove',
-            'country_code'  => $request->country_code   ?? 'XK',
             'phone_number'  => $request->phone_number   ?? '+38344223223',
-            'email'         => $request->email          ?? 'test@email.com',
-            'zip_code'      => $request->zip_code       ?? '10000',
+            'holder_name'   => $request->holder_name    ?? 'John Doe',
             'ccnumber'      => $request->ccnumber       ?? '4111111111111111',
             'cvv'           => $request->cvv            ?? '123',
             'expire_month'  => $request->expire_month   ?? '12',
             'expire_year'   => $request->expire_year    ?? '2022',
-            'holder_name'   => $request->holder_name    ?? 'John Doe',
-            'product'       => $request->product        ?? 'PRODUCT1',
-            'days'          => $request->days           ?? 0
+            'total'         => $request->total          ?? 0
         ];
 
         $host   = "https://api.avangate.com/soap/3.0/";
@@ -60,8 +51,8 @@ trait PaymentsTrait
 
         $merchantCode = '250840047793';
         $key = 'gK0xFryPsa~lt83nh7q(';
-        $productCode = env($params['product']);
-        $productPrice = $this->getProductPrice($params['product'], $params['days']);
+        $productCode = "4JZC9SBAQG";
+        $productPrice = $params['total'];
 
         $now    = gmdate('Y-m-d H:i:s');
         $string = strlen($merchantCode) . $merchantCode . strlen($now) . $now;
@@ -89,22 +80,22 @@ trait PaymentsTrait
         $Order->Items[0]->Tangible      = false;
         $Order->Items[0]->IsDynamic     = true;
         $Order->Items[0]->Price         = $productPrice;
-        $Order->Items[0]->Name          = 'Tekafja Premium' . date("Y-m-d H:i:s"); // Product Name
-        $Order->Items[0]->Description   = 'Premium Subscription'; // Product Description
+        $Order->Items[0]->Name          = 'Food Order' . date("Y-m-d H:i:s"); // Product Name
+        $Order->Items[0]->Description   = 'Food Ordered'; // Product Description
 
         $Order->BillingDetails              = new \stdClass();
-        $Order->BillingDetails->Address1    = $params['address'];
-        $Order->BillingDetails->City        = $params['city']; //not null
-        $Order->BillingDetails->State       = $params['state'];
-        $Order->BillingDetails->CountryCode = $params['country_code'];
-        $Order->BillingDetails->Phone       = $params['phone_number'];
-        $Order->BillingDetails->Email       = $params['email'];
-        $Order->BillingDetails->FirstName   = $params['first_name'];
-        $Order->BillingDetails->LastName    = $params['last_name'];
-        $Order->BillingDetails->Zip         = $params['zip_code']; //not null
+        $Order->BillingDetails->Address1    = $params['address'] ?? "test";
+        $Order->BillingDetails->City        = $params['city'] ?? "test"; //not null
+        $Order->BillingDetails->State       = $params['state'] ?? "test";
+        $Order->BillingDetails->CountryCode = $params['country_code'] ?? "test";
+        $Order->BillingDetails->Phone       = $params['phone_number'] ?? "test";
+        $Order->BillingDetails->Email       = $params['email'] ?? "test";
+        $Order->BillingDetails->FirstName   = $params['first_name'] ?? "test";
+        $Order->BillingDetails->LastName    = $params['last_name'] ?? "test";
+        $Order->BillingDetails->Zip         = $params['zip_code'] ?? "test"; //not null
 
         $Order->DeliveryDetails                 = new \stdClass();
-        $Order->DeliveryDetails->Address1       = $params['address'];
+        $Order->DeliveryDetails->Address1       = $params['address'] ?? "test";
         $Order->DeliveryDetails->City           = $user->city ?? 'Pristina'; //not null
         $Order->DeliveryDetails->State          = 'Kosovo';
         $Order->DeliveryDetails->CountryCode    = 'XK';
@@ -139,7 +130,6 @@ trait PaymentsTrait
             dd($e);
             return false;
         }
-        $this->giveUserPremium($params['product'], $params['days']);
     }
 
     public function getCardBrand($pan)
@@ -198,64 +188,5 @@ trait PaymentsTrait
 
         return "unknown";
     }
-
-    public function productIsDaily(string $product){
-        if ($product === 'PRODUCT1') {
-            return false;
-        }
-
-        if ($product === 'PRODUCT2') {
-            return true;
-        }
-
-        if($product === 'PRODUCT3') {
-            return true;
-        }
-    }
-
-    public function getProductPrice(string $product,int $days){
-        if ($product === 'PRODUCT1') {
-            return 70.00;
-        }
-
-        if ($product === 'PRODUCT2') {
-            return 1.00 + $days;
-        }
-
-        if($product === 'PRODUCT3') {
-            return 3.00 + $days;
-        }
-    }
-
-    public function giveUserPremium(string $product, $days){
-
-        Auth::guard('company')->user()->update(['is_premium' => 1]);
-
-        $user = Auth::guard('company')->user();
-        $userPosts = $user->max_posts;
-
-        if($product === 'PRODUCT1') {
-            Auth::guard('company')->user()
-                ->update([
-                    'max_posts'             => $userPosts + 1231231231231231231231,
-                    'premium_expiration'    => now()->addMonth(),
-                ]);
-        } elseif ($product === 'PRODUCT2'){
-            Auth::guard('company')->user()
-                ->update([
-                    'max_posts'             => $userPosts + 3,
-                    'premium_expiration'    => now()->addDays($days),
-                ]);
-        }elseif ($product === 'PRODUCT3'){
-            Auth::guard('company')->user()
-                ->update([
-                    'max_posts'             => $userPosts + 10,
-                    'premium_expiration'    => now()->addDays($days),
-                ]);
-        }
-
-
-    }
-
 
 }

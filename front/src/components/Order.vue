@@ -184,19 +184,20 @@ export default {
     },
     makePayment() {
       axios.post('/standup/' + this.standup_id + '', {
-        first_name: document.getElementById('fname').value,
-        last_name: document.getElementById('lname').value,
-        address: document.getElementById('address').value,
-        city: document.getElementById('city').value,
-        state: document.getElementById('state2').value,
-        country: document.getElementById('billingcountry').value,
-        email: document.getElementById('email').value,
-        zip_code: document.getElementById('zipcode').value,
-        ccnumber: document.getElementById('tiCNumber').value,
-        cvv: document.getElementById('tiCVV').value,
-        expire_month: document.getElementById('cbExpMounth').value,
-        expire_year: document.getElementById('cbExpYear').value,
-        product: 'PRODUCT' + '1',
+          title         : ['required'],
+          number        : ['required'],
+          details       : ['required'],
+          location      : ['required'],
+          telephone     : ['required'],
+          first_name    : ['required'],
+          last_name     : ['required'],
+          phone_number  : ['required'],
+          holder_name   : ['required'],
+          ccnumber      : ['required'],
+          cvv           : ['required'],
+          expire_month  : ['required'],
+          expire_year   : ['required'],
+          total         : ['required']
       })
           .then(response => console.log(response))
           .catch(e => {
