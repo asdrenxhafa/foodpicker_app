@@ -223,33 +223,6 @@ export default {
     },
     makePayment() {
 
-      // axios.get('http://localhost:8000/api/orders')
-      //     .then(response => console.log(response))
-      //     .catch(e => {
-      //       console.log(e);
-      //     })
-
-      // axios.post('http://localhost:8000/api/orders',{
-      //   title         : "Food Order",
-      //   details       : this.orderDetails,
-      //   location      : this.location,
-      //   telephone     : this.phone_number,
-      //   first_name    : this.first_name,
-      //   last_name     : this.last_name,
-      //   phone_number  : this.phone_number,
-      //   holder_name   : this.holder_name,
-      //   ccnumber      : this.ccnumber,
-      //   cvv           : this.cvv,
-      //   expire_month  : this.expire_month,
-      //   expire_year   : this.expire_year,
-      //   total         : this.total
-      // })
-      //     .then(response => console.log(response))
-      //     .catch(e => {
-      //       console.log(e);
-      //     })
-
-
       var formData = new FormData();
       formData.append('title', "Food Order");
       formData.append('details', this.orderDetails);
@@ -266,7 +239,7 @@ export default {
       formData.append('total', this.total);
       formData.append('_method', 'POST');
       axios.post('http://localhost:8000/api/orders', formData, {})
-          .then(response => console.log(response))
+          .then(() => window.location = '/')
           .catch(e => {
             console.log(e);
           })
