@@ -14,7 +14,8 @@ class Order extends Model
         'title',
         'details',
         'location',
-        'telephone'
+        'telephone',
+        'accepted'
     ];
 
     use HasFactory;

@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use App\Traits\PaymentsTrait;
+use App\Traits\smsTrait;
 
 class OrderController extends Controller
 {
 
-    use PaymentsTrait;
+    use PaymentsTrait,smsTrait;
 
     public function index()
     {
-        return Order::all();
+        return Order::where('accepted',false)->get();
     }
 
 
@@ -53,4 +54,18 @@ class OrderController extends Controller
 
         return response()->isSuccessful();
     }
+
+    public function prano(Order $order)
+    {
+        $order->update([
+            'accepted' => true
+        ]);
+
+        $message = 'Ju njoftojme se porosia e juaj ka arritur me sukses, ju falenderojme qe perzgjodhet foodpicker';
+
+        $this->sendSms($order->telephone,'+19082937912',$message);
+
+        return $order;
+    }
+
 }

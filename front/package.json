@@ -12,6 +12,7 @@
     "core-js": "^3.6.5",
     "firebase": "^8.2.8",
     "form-urlencoded": "^4.2.1",
+    "sweetalert2": "^11.0.18",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1",
     "vuetify": "^2.4.0",

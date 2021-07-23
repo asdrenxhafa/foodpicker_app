@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('orders',OrderController::class);
+Route::post('/orders/{order}/prano',[OrderController::class,'prano']);

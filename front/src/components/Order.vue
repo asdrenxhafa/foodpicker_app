@@ -31,19 +31,13 @@
           <div class="py-4 d-flex flex-row">
             <h5><span class="fa fa-check-square-o"></span><b>2 Checkout</b> | </h5><span class="pl-2">Pay</span>
           </div>
-          <h4 class="green">${{ total }}</h4>
-          <h4>Diabetes Pump & Supplies</h4>
+          <h4>Food Order</h4>
           <div class="d-flex pt-2">
             <div>
-              <p><b>Insurance Responsibility.</b><span class="green">${{ total }}</span></p>
+              <p><b>Total Price.</b><span class="green">${{ total }}</span></p>
             </div>
           </div>
-          <p>Insurance claims and all necessary dependencies will be submitted to your insurer for the coverred portion
-            of this order</p>
-          <div class="rounded bg-light d-flex">
-            <div class="p-2">Aetna-Open Access</div>
-            <div class="ml-auto p-2">OAP</div>
-          </div>
+          <p>Per cdo problem apo pakjartesi na kontaktoni ne emailen tone asdxhafa@gmail.com</p>
           <hr>
           <div class="d-flex pt-2">
             <form class="form" role="form" autocomplete="off">
@@ -77,7 +71,7 @@
         </div>
         <div class="col-sm-3 col-md-4 offset-md-1 mobile">
           <div class="py-4 d-flex justify-content-end">
-            <h6><a href="#">Cancel and return to website</a></h6>
+            <h6><a href="/">Cancel and return to website</a></h6>
           </div>
           <div class="bg-light rounded d-flex flex-column">
 
@@ -162,6 +156,7 @@ import FoodList from "@/components/Orders/foodList";
 import SideMenu from "@/components/Orders/sideMenu";
 import Cart from "@/components/Orders/cart";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 export default {
   name:"Order",
@@ -223,26 +218,30 @@ export default {
     },
     makePayment() {
 
-      var formData = new FormData();
-      formData.append('title', "Food Order");
-      formData.append('details', this.orderDetails);
-      formData.append('location', this.location);
-      formData.append('telephone', this.phone_number);
-      formData.append('first_name', this.first_name);
-      formData.append('last_name', this.last_name);
-      formData.append('phone_number', this.phone_number);
-      formData.append('holder_name', this.holder_name);
-      formData.append('ccnumber', this.ccnumber);
-      formData.append('cvv', this.cvv);
-      formData.append('expire_month', this.expire_month);
-      formData.append('expire_year', this.expire_year);
-      formData.append('total', this.total);
-      formData.append('_method', 'POST');
-      axios.post('http://localhost:8000/api/orders', formData, {})
-          .then(() => window.location = '/')
-          .catch(e => {
-            console.log(e);
-          })
+      if(this.validatePayment()){
+        var formData = new FormData();
+        formData.append('title', "Food Order");
+        formData.append('details', this.orderDetails);
+        formData.append('location', this.location);
+        formData.append('telephone', this.phone_number);
+        formData.append('first_name', this.first_name);
+        formData.append('last_name', this.last_name);
+        formData.append('phone_number', this.phone_number);
+        formData.append('holder_name', this.holder_name);
+        formData.append('ccnumber', this.ccnumber);
+        formData.append('cvv', this.cvv);
+        formData.append('expire_month', this.expire_month);
+        formData.append('expire_year', this.expire_year);
+        formData.append('total', this.total);
+        formData.append('_method', 'POST');
+        axios.post('http://localhost:8000/api/orders', formData, {})
+            .then(() => window.location = '/')
+            .catch(e => {
+              console.log(e);
+            })
+      }else{
+        this.errorNotification('Ju lutem mbushni te gjitha fushat');
+      }
 
     },
     orderingPage(){
@@ -250,7 +249,29 @@ export default {
     },
     paymentPage(){
       this.doingPayment = true;
-    }
+    },
+    validatePayment(){
+      let allowed = true;
+
+      if(this.first_name === "" || this.last_name === "" || this.phone_number === "" || this.location === ""){
+        allowed = false;
+      }
+
+      return allowed;
+    },
+    errorNotification(message){
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 5000
+      });
+
+      Toast.fire({
+        icon: 'error',
+        title: message,
+      })
+    },
   },
   computed: {
     foodList: function () {
@@ -281,21 +302,39 @@ export default {
     self.foodData = [
       {
         id: 1,
-        name: "Testi1",
-        description: "asd",
-        price: 11
+        name: "Pizza",
+        description: "Chicago Pizza",
+        price: 5
       },
       {
         id: 2,
-        name: "Testi2",
-        description: "asd",
-        price: 22
+        name: "Hamburger",
+        description: "Normal Hamburger",
+        price: 3
       },
       {
         id: 3,
-        name: "Testi3",
-        description: "asd",
-        price: 33
+        name: "Steak",
+        description: "Medium-rare Steak",
+        price: 15
+      },
+      {
+        id: 4,
+        name: "Chicken Breast",
+        description: "",
+        price: 5
+      },
+      {
+        id: 5,
+        name: "Spaghetti Carbonara",
+        description: "Pershute,kreme,veze,vaj ulliri,hudher,ereza",
+        price: 10
+      },
+      {
+        id: 6,
+        name: "Chicken Burger",
+        description: "Chicken Burger",
+        price: 3
       },
     ];
 
